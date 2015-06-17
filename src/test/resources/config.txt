@@ -1,1 +1,4 @@
-tessedit_char_whitelist 0123456789
+tessedit_write_params_to_file target/running_parameters.txt
+tessedit_char_blacklist !"£$%&/()=?^|
+tessedit_char_whitelist 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+output_ambig_words_file target/errors.txt
