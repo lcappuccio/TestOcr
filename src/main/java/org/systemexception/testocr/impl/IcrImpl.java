@@ -9,6 +9,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author lcappuccio
@@ -19,6 +21,7 @@ public class IcrImpl implements Icr {
 	private final Tesseract tesseract = new Tesseract();
 
 	public IcrImpl() {
+		tesseract.setLanguage("spa");
 		ArrayList<String> configList = new ArrayList();
 		URL configFileUrl = this.getClass().getResource("/config.txt");
 		try {
