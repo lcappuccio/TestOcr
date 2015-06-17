@@ -12,11 +12,11 @@ import java.io.File;
  */
 public class IcrImpl implements Icr {
 
-	Tesseract tesseract = Tesseract.getInstance();
+	private final Tesseract tesseract = new Tesseract();
+
 	@Override
 	public String recognize(String imagePath) throws TesseractException {
 		File imageFile = new File(imagePath);
-//		tesseract.setDatapath(System.getProperty("user.dir"));
 		String result = tesseract.doOCR(imageFile);
 		return result;
 	}
