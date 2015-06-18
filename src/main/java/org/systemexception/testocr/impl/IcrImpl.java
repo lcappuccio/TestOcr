@@ -22,14 +22,8 @@ public class IcrImpl implements Icr {
 
 	public IcrImpl() {
 		tesseract.setLanguage("spa");
-		ArrayList<String> configList = new ArrayList();
-		URL configFileUrl = this.getClass().getResource("/config.txt");
-		try {
-			configList.add(Paths.get(configFileUrl.toURI()).toAbsolutePath().toString());
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
-		tesseract.setConfigs(configList);
+		tesseract.setConfigs(Arrays.asList("bazaar"));
+		tesseract.setPageSegMode(6);
 	}
 
 	@Override
