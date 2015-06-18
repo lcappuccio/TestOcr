@@ -23,6 +23,7 @@ public class IcrImpl implements Icr {
 	public IcrImpl() {
 		tesseract.setLanguage("spa");
 		tesseract.setConfigs(Arrays.asList("bazaar"));
+		tesseract.setPageSegMode(6);
 	}
 
 	@Override
