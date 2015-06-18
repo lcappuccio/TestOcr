@@ -29,7 +29,6 @@ public class IcrImpl implements Icr {
 	public String recognize(String imagePath) throws TesseractException {
 		File imageFile = new File(imagePath);
 		String result = tesseract.doOCR(imageFile);
-		
 		return result;
 	}
 }
