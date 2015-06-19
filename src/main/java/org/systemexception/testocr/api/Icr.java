@@ -11,8 +11,8 @@ public interface Icr {
 	/**
 	 * Recognizes elements in an image
 	 *
-	 * @param imagePath
-	 * @return
+	 * @param imagePath the absolute image path
+	 * @return the readed value
 	 * @throws TesseractException
 	 */
 	String recognize(String imagePath) throws TesseractException;

@@ -28,11 +28,6 @@
 			<version>4.12</version>
 		</dependency>
 		<dependency>
-			<groupId>com.github.lcappuccio</groupId>
-			<artifactId>CommonLogger</artifactId>
-			<version>1.0.1</version>
-		</dependency>
-		<dependency>
 			<groupId>net.sourceforge.tess4j</groupId>
 			<artifactId>tess4j</artifactId>
 			<version>2.0.0</version>

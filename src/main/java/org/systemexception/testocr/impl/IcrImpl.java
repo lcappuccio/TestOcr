@@ -5,12 +5,7 @@ import net.sourceforge.tess4j.TesseractException;
 import org.systemexception.testocr.api.Icr;
 
 import java.io.File;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author lcappuccio
@@ -29,7 +24,6 @@ public class IcrImpl implements Icr {
 	@Override
 	public String recognize(String imagePath) throws TesseractException {
 		File imageFile = new File(imagePath);
-		String result = tesseract.doOCR(imageFile);
-		return result;
+		return tesseract.doOCR(imageFile).replace("\n","");
 	}
 }
