@@ -1,8 +1,9 @@
-package org.systemexception.testocr.impl;
+package org.systemexception.testocr.test;
 
 import net.sourceforge.tess4j.TesseractException;
 import org.junit.Test;
 import org.systemexception.testocr.api.Icr;
+import org.systemexception.testocr.impl.IcrImpl;
 
 import java.io.File;
 import java.net.URISyntaxException;
