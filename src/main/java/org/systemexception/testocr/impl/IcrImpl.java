@@ -16,14 +16,16 @@ public class IcrImpl implements Icr {
 	private final Tesseract tesseract = new Tesseract();
 
 	public IcrImpl() {
-		tesseract.setLanguage("spa");
-		tesseract.setConfigs(Arrays.asList("bazaar"));
+		tesseract.setLanguage("eng");
+		tesseract.setConfigs(Arrays.asList("config_numbers_only.cfg"));
 		tesseract.setPageSegMode(6);
 	}
 
 	@Override
 	public String recognize(String imagePath) throws TesseractException {
 		File imageFile = new File(imagePath);
-		return tesseract.doOCR(imageFile).replace("\n","");
+		String result = tesseract.doOCR(imageFile).replaceAll("[^0-9]", "").replaceFirst("^0+(?!$)", "");
+		System.out.println("File: " + imagePath + ", result: " + result);
+		return result;
 	}
 }
