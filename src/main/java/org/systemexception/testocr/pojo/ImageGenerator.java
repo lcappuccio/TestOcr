@@ -17,6 +17,7 @@ public class ImageGenerator {
 
 	private Font fontMonospace;
 	private FontRenderContext fontRenderContext;
+	private BufferedImage image;
 
 	public ImageGenerator() {
 		BufferedImage image = new BufferedImage(1, 1, BufferedImage.TYPE_BYTE_GRAY);
@@ -24,12 +25,17 @@ public class ImageGenerator {
 		fontRenderContext = image.getGraphics().getFontMetrics().getFontRenderContext();
 	}
 
+	/**
+	 * Draws the string to the graphics object and invoke a file save
+	 *
+	 * @param text the text to be drawn, will be the filename
+	 */
 	public void drawStringAndSaveFile(String text) {
 		changeFontMonospaceSize();
 		Rectangle2D rectangle = fontMonospace.getStringBounds(text, fontRenderContext);
 		int imageWidth = (int) (rectangle.getWidth() + rectangle.getWidth() * 0.1);
 		int imageHeight = (int) (rectangle.getHeight() + rectangle.getHeight() * 0.1);
-		BufferedImage image = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_BYTE_GRAY);
+		image = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_BYTE_GRAY);
 		Graphics graphics = image.getGraphics();
 		graphics.setColor(Color.WHITE);
 		graphics.fillRect(0, 0, imageWidth, imageHeight);
@@ -38,16 +44,30 @@ public class ImageGenerator {
 		graphics.drawString(text, 0, (int) (imageHeight * 0.9));
 		// release resources
 		graphics.dispose();
-		try {
-			ImageIO.write(image, "png", new File(text + ".png"));
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
+		saveFile(text);
 	}
 
+	/**
+	 * Changes the font to a new randomized size
+	 */
 	private void changeFontMonospaceSize() {
 		Random random = new Random();
 		int fontSize = random.nextInt(256);
 		fontMonospace = new Font(Font.MONOSPACED, Font.PLAIN, fontSize);
+	}
+
+	/**
+	 * Saves the file to disk
+	 *
+	 * @param fileName the filename, in this case the string drawn will be the filename
+	 */
+	private void saveFile(final String fileName) {
+		String finalFileName = fileName + ".png";
+		try {
+			ImageIO.write(image, "png", new File(finalFileName));
+			System.out.println("Saving file " + finalFileName);
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }
