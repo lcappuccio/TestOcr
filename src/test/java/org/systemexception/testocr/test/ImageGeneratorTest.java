@@ -14,6 +14,7 @@ public class ImageGeneratorTest {
 	@Test
 	public void doStuff() {
 		ImageGenerator sut = new ImageGenerator();
+		sut.drawString("123");
+		sut.drawString("abc");
 	}
-
 }
