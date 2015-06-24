@@ -16,7 +16,7 @@ import java.util.Random;
 public class ImageGenerator {
 
 	private Font fontMonospace;
-	private FontRenderContext fontRenderContext;
+	private final FontRenderContext fontRenderContext;
 	private BufferedImage image;
 
 	public ImageGenerator() {
@@ -64,8 +64,9 @@ public class ImageGenerator {
 	private void saveFile(final String fileName) {
 		String finalFileName = fileName + ".png";
 		try {
+			String runningPath = System.getProperty("user.dir");
 			ImageIO.write(image, "png", new File(finalFileName));
-			System.out.println("Saving file " + finalFileName);
+			System.out.println("Saving file " + runningPath + File.pathSeparator + finalFileName);
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
