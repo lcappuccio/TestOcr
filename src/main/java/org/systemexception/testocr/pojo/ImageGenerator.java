@@ -15,13 +15,11 @@ import java.util.Random;
  */
 public class ImageGenerator {
 
-	private final BufferedImage image;
-	private Graphics graphics;
 	private Font fontMonospace;
 	private FontRenderContext fontRenderContext;
 
 	public ImageGenerator() {
-		image = new BufferedImage(1, 1, BufferedImage.TYPE_BYTE_GRAY);
+		BufferedImage image = new BufferedImage(1, 1, BufferedImage.TYPE_BYTE_GRAY);
 		fontMonospace = new Font(Font.MONOSPACED, Font.PLAIN, 24);
 		fontRenderContext = image.getGraphics().getFontMetrics().getFontRenderContext();
 	}
@@ -32,7 +30,7 @@ public class ImageGenerator {
 		int imageWidth = (int) (rectangle.getWidth() + rectangle.getWidth() * 0.1);
 		int imageHeight = (int) (rectangle.getHeight() + rectangle.getHeight() * 0.1);
 		BufferedImage image = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_BYTE_GRAY);
-		graphics = image.getGraphics();
+		Graphics graphics = image.getGraphics();
 		graphics.setColor(Color.WHITE);
 		graphics.fillRect(0, 0, imageWidth, imageHeight);
 		graphics.setColor(Color.BLACK);
