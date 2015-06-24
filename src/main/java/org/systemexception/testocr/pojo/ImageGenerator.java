@@ -26,7 +26,7 @@ public class ImageGenerator {
 		fontRenderContext = image.getGraphics().getFontMetrics().getFontRenderContext();
 	}
 
-	public void drawString(String text) {
+	public void drawStringAndSaveFile(String text) {
 		changeFontMonospaceSize();
 		Rectangle2D rectangle = fontMonospace.getStringBounds(text, fontRenderContext);
 		int imageWidth = (int) (rectangle.getWidth() + rectangle.getWidth() * 0.1);
@@ -48,7 +48,7 @@ public class ImageGenerator {
 	}
 
 	private void changeFontMonospaceSize() {
-		Random random = new Random(System.currentTimeMillis());
+		Random random = new Random();
 		int fontSize = random.nextInt(256);
 		fontMonospace = new Font(Font.MONOSPACED, Font.PLAIN, fontSize);
 	}
