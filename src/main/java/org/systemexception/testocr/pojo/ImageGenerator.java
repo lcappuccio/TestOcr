@@ -18,20 +18,20 @@ public class ImageGenerator {
 	private final Graphics graphics;
 
 	public ImageGenerator() {
-		image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB);
-		Font fontMonospace = new Font(Font.MONOSPACED, Font.PLAIN, 12);
+		image = new BufferedImage(1, 1, BufferedImage.TYPE_BYTE_GRAY);
+		Font fontMonospace = new Font(Font.MONOSPACED, Font.PLAIN, 24);
 		FontRenderContext fontRenderContext = image.getGraphics().getFontMetrics().getFontRenderContext();
 
 		Rectangle2D rectangle = fontMonospace.getStringBounds("123", fontRenderContext);
-		int imageWidth = (int) rectangle.getWidth();
-		int imageHeight = (int) rectangle.getHeight();
-		BufferedImage image = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_RGB);
+		int imageWidth = (int) (rectangle.getWidth() + rectangle.getWidth() * 0.1);
+		int imageHeight = (int) (rectangle.getHeight() + rectangle.getHeight() * 0.1);
+		BufferedImage image = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_BYTE_GRAY);
 		graphics = image.getGraphics();
 		graphics.setColor(Color.WHITE);
 		graphics.fillRect(0, 0, imageWidth, imageHeight);
-		graphics.setColor(Color.BLUE);
+		graphics.setColor(Color.BLACK);
 		graphics.setFont(fontMonospace);
-		graphics.drawString("123", 0, imageHeight);
+		graphics.drawString("123", 0, (int) (imageHeight * 0.9));
 		// release resources
 		graphics.dispose();
 		try {
