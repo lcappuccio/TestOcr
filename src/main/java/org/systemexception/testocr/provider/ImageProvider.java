@@ -19,6 +19,7 @@ public class ImageProvider {
 	private final FontRenderContext fontRenderContext;
 	private BufferedImage image;
 	private final String runningPath;
+	private final int minFontSize = 10;
 
 	public ImageProvider() {
 		runningPath = System.getProperty("user.dir") + File.separator;
@@ -39,19 +40,7 @@ public class ImageProvider {
 	 * @param text the text to be drawn, will be the filename
 	 */
 	public void drawStringAndSaveFile(String text) {
-		randomizeFontSize();
-		Font fontSelected = fontMonospace;
-		Random rnd = new Random();
-		int randomFontSelector = rnd.nextInt(3);
-		if (randomFontSelector == 0) {
-			fontSelected = fontMonospace;
-		}
-		if (randomFontSelector == 1) {
-			fontSelected = fontSans;
-		}
-		if (randomFontSelector == 2) {
-			fontSelected = fontSerif;
-		}
+		Font fontSelected = getRandomFont();
 		Rectangle2D rectangle = fontSelected.getStringBounds(text, fontRenderContext);
 		int imageWidth = (int) (rectangle.getWidth() + rectangle.getWidth() * 0.1);
 		int imageHeight = (int) (rectangle.getHeight() + rectangle.getHeight() * 0.1);
@@ -68,11 +57,28 @@ public class ImageProvider {
 	}
 
 	/**
+	 * Returns a randomized font type
+	 * @return the randomized font
+	 */
+	private Font getRandomFont() {
+		Random rnd = new Random();
+		randomizeFontSize();
+		int randomFontSelector = rnd.nextInt(3);
+		if (randomFontSelector == 0) {
+			return fontMonospace;
+		}
+		if (randomFontSelector == 1) {
+			return fontSans;
+		}
+		return fontSerif;
+	}
+
+	/**
 	 * Changes the font to a new randomized size
 	 */
 	private void randomizeFontSize() {
 		Random random = new Random();
-		int fontSize = random.nextInt(256);
+		int fontSize = random.nextInt(256) + minFontSize;
 		fontMonospace =  fontMonospace.deriveFont((float) fontSize);
 		fontSans = fontSans.deriveFont((float) fontSize);
 		fontSerif = fontSans.deriveFont((float) fontSize);
