@@ -1,7 +1,7 @@
 package org.systemexception.testocr.test;
 
 import org.junit.Test;
-import org.systemexception.testocr.pojo.ImageGenerator;
+import org.systemexception.testocr.provider.ImageGenerator;
 
 /**
  * @author leo

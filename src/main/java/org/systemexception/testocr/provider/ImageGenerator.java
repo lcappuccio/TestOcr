@@ -1,4 +1,4 @@
-package org.systemexception.testocr.pojo;
+package org.systemexception.testocr.provider;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
