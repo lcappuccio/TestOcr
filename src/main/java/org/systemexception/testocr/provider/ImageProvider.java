@@ -13,15 +13,23 @@ import java.util.Random;
  * @author leo
  * @date 24/06/15 14:23
  */
-public class ImageGenerator {
+public class ImageProvider {
 
-	private Font fontMonospace;
+	private Font fontMonospace, fontSans, fontSerif;
 	private final FontRenderContext fontRenderContext;
 	private BufferedImage image;
+	private final String runningPath;
 
-	public ImageGenerator() {
+	public ImageProvider() {
+		runningPath = System.getProperty("user.dir") + File.separator;
 		BufferedImage image = new BufferedImage(1, 1, BufferedImage.TYPE_BYTE_GRAY);
-		fontMonospace = new Font(Font.MONOSPACED, Font.PLAIN, 24);
+		try {
+			fontMonospace = getFont("FreeMono.ttf");
+			fontSans = getFont("FreeSans.ttf");
+			fontSerif = getFont("FreeSerif.ttf");
+		} catch (FontFormatException | IOException e) {
+			System.out.println(e.getMessage());
+		}
 		fontRenderContext = image.getGraphics().getFontMetrics().getFontRenderContext();
 	}
 
@@ -31,7 +39,7 @@ public class ImageGenerator {
 	 * @param text the text to be drawn, will be the filename
 	 */
 	public void drawStringAndSaveFile(String text) {
-		changeFontMonospaceSize();
+		randomizeFontSize();
 		Rectangle2D rectangle = fontMonospace.getStringBounds(text, fontRenderContext);
 		int imageWidth = (int) (rectangle.getWidth() + rectangle.getWidth() * 0.1);
 		int imageHeight = (int) (rectangle.getHeight() + rectangle.getHeight() * 0.1);
@@ -50,10 +58,12 @@ public class ImageGenerator {
 	/**
 	 * Changes the font to a new randomized size
 	 */
-	private void changeFontMonospaceSize() {
+	private void randomizeFontSize() {
 		Random random = new Random();
 		int fontSize = random.nextInt(256);
-		fontMonospace = new Font(Font.MONOSPACED, Font.PLAIN, fontSize);
+		fontMonospace =  fontMonospace.deriveFont((float) fontSize);
+		fontSans = fontSans.deriveFont((float) fontSize);
+		fontSerif = fontSans.deriveFont((float) fontSize);
 	}
 
 	/**
@@ -64,11 +74,23 @@ public class ImageGenerator {
 	private void saveFile(final String fileName) {
 		String finalFileName = fileName + ".png";
 		try {
-			String runningPath = System.getProperty("user.dir");
 			ImageIO.write(image, "png", new File(finalFileName));
-			System.out.println("Saving file " + runningPath + File.pathSeparator + finalFileName);
+			System.out.println("Saving file " + runningPath + finalFileName);
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	/**
+	 * Returns a font object given a TrueTypeFont file name
+	 *
+	 * @param fontFileName
+	 * @return
+	 * @throws IOException
+	 * @throws FontFormatException
+	 */
+	private Font getFont(String fontFileName) throws IOException, FontFormatException {
+		String fontPath = ImageProvider.class.getClassLoader().getResource(fontFileName).getPath();
+		return Font.createFont(Font.TRUETYPE_FONT, new File(fontPath));
 	}
 }
