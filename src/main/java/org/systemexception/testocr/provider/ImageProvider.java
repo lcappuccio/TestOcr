@@ -19,7 +19,6 @@ public class ImageProvider {
 	private final FontRenderContext fontRenderContext;
 	private BufferedImage image;
 	private final String runningPath;
-	private final int minFontSize = 10;
 
 	public ImageProvider() {
 		runningPath = System.getProperty("user.dir") + File.separator;
@@ -78,6 +77,7 @@ public class ImageProvider {
 	 */
 	private void randomizeFontSize() {
 		Random random = new Random();
+		int minFontSize = 10;
 		int fontSize = random.nextInt(256) + minFontSize;
 		fontMonospace =  fontMonospace.deriveFont((float) fontSize);
 		fontSans = fontSans.deriveFont((float) fontSize);
@@ -102,8 +102,8 @@ public class ImageProvider {
 	/**
 	 * Returns a font object given a TrueTypeFont file name
 	 *
-	 * @param fontFileName
-	 * @return
+	 * @param fontFileName the font file name
+	 * @return the specified font
 	 * @throws IOException
 	 * @throws FontFormatException
 	 */
