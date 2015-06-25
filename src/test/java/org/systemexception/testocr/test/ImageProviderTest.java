@@ -12,9 +12,8 @@ public class ImageProviderTest {
 	@Test
 	public void doStuff() {
 		ImageProvider sut = new ImageProvider();
-		sut.drawStringAndSaveFile("123");
-		sut.drawStringAndSaveFile("19831919");
-		sut.drawStringAndSaveFile("456");
-		sut.drawStringAndSaveFile("19821");
+		for (int i = 100; i < 200; i++) {
+			sut.drawStringAndSaveFile(String.valueOf(i));
+		}
 	}
 }
