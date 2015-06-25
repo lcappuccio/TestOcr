@@ -40,7 +40,19 @@ public class ImageProvider {
 	 */
 	public void drawStringAndSaveFile(String text) {
 		randomizeFontSize();
-		Rectangle2D rectangle = fontMonospace.getStringBounds(text, fontRenderContext);
+		Font fontSelected = fontMonospace;
+		Random rnd = new Random();
+		int randomFontSelector = rnd.nextInt(3);
+		if (randomFontSelector == 0) {
+			fontSelected = fontMonospace;
+		}
+		if (randomFontSelector == 1) {
+			fontSelected = fontSans;
+		}
+		if (randomFontSelector == 2) {
+			fontSelected = fontSerif;
+		}
+		Rectangle2D rectangle = fontSelected.getStringBounds(text, fontRenderContext);
 		int imageWidth = (int) (rectangle.getWidth() + rectangle.getWidth() * 0.1);
 		int imageHeight = (int) (rectangle.getHeight() + rectangle.getHeight() * 0.1);
 		image = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_BYTE_GRAY);
@@ -48,7 +60,7 @@ public class ImageProvider {
 		graphics.setColor(Color.WHITE);
 		graphics.fillRect(0, 0, imageWidth, imageHeight);
 		graphics.setColor(Color.BLACK);
-		graphics.setFont(fontMonospace);
+		graphics.setFont(fontSelected);
 		graphics.drawString(text, 0, (int) (imageHeight * 0.9));
 		// release resources
 		graphics.dispose();
