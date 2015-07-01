@@ -17,6 +17,9 @@ public class IcrImpl implements Icr {
 
 	public IcrImpl() {
 		tesseract.setLanguage("eng");
+		ClassLoader classLoader = getClass().getClassLoader();
+		File tessdataFolder = new File(classLoader.getResource("tessdata").getFile());
+		tesseract.setDatapath(tessdataFolder.getAbsolutePath());
 		tesseract.setConfigs(Arrays.asList("config_numbers_only.cfg"));
 		tesseract.setPageSegMode(6);
 	}
