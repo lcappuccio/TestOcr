@@ -3,4 +3,4 @@ jdk:
   - oraclejdk8
 before_install:
   - sudo apt-get update -qq
-  - sudo apt-get install -y tesseract-ocr
+  - sudo apt-get install -y tesseract-ocr libtesseract3 libtesseract-dev
