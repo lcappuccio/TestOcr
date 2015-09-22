@@ -1,7 +1,13 @@
 # TestOcr
 Test Ocr Library PlayGround
 
-[![Build Status](https://travis-ci.org/lcappuccio/TestOcr.svg?branch=master)](https://travis-ci.org/lcappuccio/TestOcr)
+**Master**
+
+[![Build Status](https://travis-ci.org/lcappuccio/ocr-test.svg?branch=master)](https://travis-ci.org/lcappuccio/ocr-test)
+
+**Develop**
+
+[![Build Status](https://travis-ci.org/lcappuccio/ocr-test.svg?branch=develop)](https://travis-ci.org/lcappuccio/ocr-test)
 
 ## Requirements
 * install libtesseract on your system
