@@ -13,18 +13,19 @@ import static org.junit.Assert.assertTrue;
  */
 public class ImageProviderTest {
 
+	private final String imagePath = System.getProperty("user.dir") + File.separator + "target";
+
 	@Test
 	public void imageIsCreated() {
 		ImageProvider sut = new ImageProvider();
 		for (int i = 0; i < 10; i++) {
-			sut.drawStringAndSaveFile(String.valueOf(i));
+			sut.drawStringAndSaveFile(imagePath, String.valueOf(i));
 			assertTrue(fileExists(String.valueOf(i)));
 		}
 	}
 
 	private boolean fileExists(String fileName) {
-		String filePathAndName = System.getProperty("user.dir");
-		File imageFile = new File(filePathAndName + File.separator + fileName + ".png");
+		File imageFile = new File(imagePath + File.separator + fileName + ".png");
 		return imageFile.exists();
 	}
 }
