@@ -18,10 +18,8 @@ public class ImageProvider {
 	private Font fontMonospace, fontSans, fontSerif;
 	private final FontRenderContext fontRenderContext;
 	private BufferedImage image;
-	private final String runningPath;
 
 	public ImageProvider() {
-		runningPath = System.getProperty("user.dir") + File.separator;
 		BufferedImage image = new BufferedImage(1, 1, BufferedImage.TYPE_BYTE_GRAY);
 		try {
 			fontMonospace = getFont("FreeMono.ttf");
@@ -38,7 +36,7 @@ public class ImageProvider {
 	 *
 	 * @param text the text to be drawn, will be the filename
 	 */
-	public void drawStringAndSaveFile(String text) {
+	public void drawStringAndSaveFile(final String path, final String text) {
 		Font fontSelected = getRandomFont();
 		Rectangle2D rectangle = fontSelected.getStringBounds(text, fontRenderContext);
 		int imageWidth = (int) (rectangle.getWidth() + rectangle.getWidth() * 0.1);
@@ -52,7 +50,7 @@ public class ImageProvider {
 		graphics.drawString(text, 0, (int) (imageHeight * 0.9));
 		// release resources
 		graphics.dispose();
-		saveFile(text);
+		saveFile(path, text);
 	}
 
 	/**
@@ -89,11 +87,11 @@ public class ImageProvider {
 	 *
 	 * @param fileName the filename, in this case the string drawn will be the filename
 	 */
-	private void saveFile(final String fileName) {
+	private void saveFile(final String path, final String fileName) {
 		String finalFileName = fileName + ".png";
 		try {
-			ImageIO.write(image, "png", new File(finalFileName));
-			System.out.println("Saving file " + runningPath + finalFileName);
+			ImageIO.write(image, "png", new File(path + File.separator + finalFileName));
+			System.out.println("Saving file " + path + File.separator + finalFileName);
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
