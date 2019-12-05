@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class ImageProviderTest {
 
-	private final String imagePath = System.getProperty("user.dir") + File.separator + "target";
+	private final String imagePath = System.getProperty("user.dir");
 
 	@Test
 	public void imageIsCreated() {
