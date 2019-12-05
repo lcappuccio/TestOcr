@@ -18,7 +18,7 @@ public class ImageProviderTest {
 	@Test
 	public void imageIsCreated() {
 		ImageProvider sut = new ImageProvider();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 100; i++) {
 			sut.drawStringAndSaveFile(imagePath, String.valueOf(i));
 			assertTrue(fileExists(String.valueOf(i)));
 		}

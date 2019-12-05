@@ -35,6 +35,20 @@ public class IcrImplTest {
 		assertTrue(matches * 100 / imageFiles.length > 50);
 	}
 
+	@Test
+	public void matchNumbersFrom_0_to_100Pct() throws URISyntaxException, TesseractException {
+		File[] imageFiles = getFiles("/numbers_0_to_100");
+		int matches = 0;
+		for (File imageFile : imageFiles) {
+			String readedNumber = sut.recognize(imageFile.getAbsolutePath());
+			String numberInFile = getFileNameWithoutPathAndExtension(imageFile.getName());
+			if (readedNumber.equals(numberInFile)) {
+				matches++;
+			}
+		}
+		assertTrue(matches * 100 / imageFiles.length > 50);
+	}
+
 	private File[] getFiles(String path) throws URISyntaxException {
 		URL fileUrl = this.getClass().getResource(path);
 		Path runningPath = Paths.get(fileUrl.toURI()).toAbsolutePath();
